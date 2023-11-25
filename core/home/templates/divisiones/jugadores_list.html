@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="my-5">
+    <div class="position-fixed w-100 z-index-5 mx-n4 mx-lg-n6 bg-white border-bottom border-300" style="top: 65px">
+        <nav class="simplebar-scrollspy navbar py-0 scrollbar-overlay" id="widgets-scrollspy">
+            <ul class="nav">
+                <li class="nav-item"> <a class="test nav-link text-700 fw-bold py-3 lh-1 text-nowrap"
+                        href="#scrollsdivisiones">Psicología > Planteles > {{ plantel }} > Jugadores > WORKING </a> </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {% for jugador in jugadores %}
+
+        <div class="col-md-2 my-2">
+            <div class="card card-sm ">
+                <a href="">
+                    <img src="{{ jugador.image.url }}" class="card-img-top " alt="Imagen del Jugador 1">
+                    <span>{{jugador.user.first_name}} {{ jugador.user.last_name }}</span>
+                </a>
+
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="my-5">
+  <div class="position-fixed w-100 z-index-5 mx-n4 mx-lg-n6 bg-white border-bottom border-300" style="top: 65px">
+    <nav class="simplebar-scrollspy navbar py-0 scrollbar-overlay" id="widgets-scrollspy">
+      <ul class="nav">
+        <li class="nav-item"> <a class="test nav-link text-700 fw-bold py-3 lh-1 text-nowrap"
+            href="">Planteles</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="container" id="divisiones">
+  <div class="row gx-3 gy-6 mb-8">
+
+    {% for division in divisiones %}
+    <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
+      <div class="product-card-container h-100">
+
+          <div class="position-relative text-decoration-none product-card h-100 card">
+              <div class="d-flex flex-column justify-content-between h-100">
+                  <div>
+                      <div class="border border-1 rounded-3 position-relative mb-3">
+                          <img class="img-fluid" src="{% static 'assets/img/bg/Portada FC Juarez 01.jpg'%}"
+                              alt="">
+                      </div>
+                      <a class="stretched-link"
+                          href="">
+                          <h6 class="mb-2 lh-sm line-clamp-3 product-name">
+                              Agustin José Urzi
+                          </h6>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% endblock %}

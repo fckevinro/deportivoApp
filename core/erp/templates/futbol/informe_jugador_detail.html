@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="my-5">
+    Informe de jugador
+</h1>
+
+<div class="card">
+    <div class="card-header text-center ">
+        <h4> {{ informe.user }} </h4>
+        <span>  <b>{{ informe.rival }}</b> | {{ informe.fecha_calendario }} </span> <br>
+        <span> <b> Jornada: {{ informe.jornada }}</b></span>
+    </div>
+    <div class="card-body">
+        <div>
+            <h4>Notas del partido</h4>
+            {{ informe.notas_partido | safe }}
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <h6>Departamento de ciencia de datos | FCJuárez</h6>
+    </div>
+</div>
+
+
+{% endblock%}

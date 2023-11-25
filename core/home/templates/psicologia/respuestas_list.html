@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="my-5">
+    <div class="position-fixed w-100 z-index-5 mx-n4 mx-lg-n6 bg-white border-bottom border-300" style="top: 65px">
+        <nav class="simplebar-scrollspy navbar py-0 scrollbar-overlay" id="widgets-scrollspy">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="test nav-link text-700 fw-bold py-3 lh-1 text-nowrap" href="">
+                        Psicología > Respuestas
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<div class="col">
+    <h3 class="mb-0 text-primary position-relative fw-bold"><span class="bg-soft pe-2">Respuestas</span><span
+            class="border border-primary-200 position-absolute top-50 translate-middle-y w-100 start-0 z-index--1"></span>
+    </h3>
+</div>
+
+
+
+<div class="container my-5">
+    <a href="{% url 'export_csv' %}" class="btn btn-primary">Descargar CSV</a>
+
+
+
+    <div id="tableExample3"
+        data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;date&quot;,&quot;internal&quot;,&quot;external&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true}">
+        <div class="search-box mb-3 mx-auto">
+            <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+                <input class="form-control search-input search form-control-sm" type="search" placeholder="Search"
+                    aria-label="Search">
+                <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false"
+                    data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512" data-fa-i2svg="">
+                    <path fill="currentColor"
+                        d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z">
+                    </path>
+                </svg><!-- <span class="fas fa-search search-box-icon"></span> Font Awesome fontawesome.com -->
+
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm fs--1 mb-0">
+                <thead>
+                    <tr>
+                        <th class="sort border-top ps-3" data-sort="name">Name</th>
+                        <th class="sort border-top" data-sort="date">Fecha</th>
+                        <th class="sort border-top" data-sort="internal">Situacion Interna</th>
+                        <th class="sort border-top" data-sort="external">Situacion Externa</th>
+                        <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for respuesta in respuestas %}
+                    <tr>
+                        <td class="align-middle ps-3 name">{{ respuesta.user.first_name }} {{ respuesta.user.last_name }}</td>
+                        <td class="align-middle date">{{ respuesta.created_at }}</td>
+                        <td class="align-middle internal">
+                            {% if respuesta.enfoque_interno == '1' %}
+                            Si, Me gustaria hablar al respecto
+                            {% elif respuesta.enfoque_interno == '2' %}
+                            Si, No gustaria hablar al respecto
+                            {% elif respuesta.enfoque_interno == '3' %}
+                            No
+                            {% else %}
+                            Valor Desconocido
+                            {% endif %}
+                        </td>
+                        <td class="align-middle external">
+                            {% if respuesta.enfoque_externo == '1' %}
+                            Si, Me gustaria hablar al respecto
+                            {% elif respuesta.enfoque_externo == '2' %}
+                            Si, No gustaria hablar al respecto
+                            {% elif respuesta.enfoque_externo == '3' %}
+                            No
+                            {% else %}
+                            Valor Desconocido
+                            {% endif %}
+                        </td>
+                        <td class="align-middle white-space-nowrap text-end pe-0">
+                                <button class="btn btn-sm btn-phoenix-primary rounded-pill me-1 mb-1"" type="button" data-bs-toggle="modal" data-bs-target="#jugador_{{ respuesta.user.id }}">
+                                    <span data-feather="eye" style="height: 15px; width: 15px;" ></span>
+                                </button>   
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="jugador_{{ respuesta.user.id }}" tabindex="-1" aria-labelledby="tooltipModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <strong class="me-auto modal-title">{{ respuesta.user.first_name }} {{ respuesta.user.last_name }}</strong><small class="text-800">{{ respuesta.created_at }}</small>                                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span
+                                            class="fas fa-times fs--1"></span></button> 
+                                </div>
+                                <div class="modal-body">
+                                    <h5 >Respuestas</h5>
+                                    <div class="container">
+                                        <p></p>
+                                        <span>
+                                            <strong>Humon Matutino: </strong>  {{ respuesta.humor_matutino }} <br>
+                                        </span>
+                                        <span>
+                                            <strong>Horas dormidas:</strong>{{ respuesta.horas_dormidas }} Horas con {{ respuesta.minutos_dormidos }} minutos <br>
+                                        </span> 
+                                        <span>
+                                            <strong>Calidad de descanso: </strong> {{ respuesta.calidad_descanso }} <br>
+                                        </span>
+                                        <span>
+                                            <strong>Nivel de eustres: </strong> {{ respuesta.nivel_eustres }} <br>
+                                        </span>
+                                        <span>
+                                            <strong>Nivel de distres: </strong> {{ respuesta.nivel_distres }} <br>
+                                        </span>
+                                        <span>
+                                            <strong>Preparación mental: </strong> {{ respuesta.preparacion_mental }} <br>
+                                        </span>
+                                    </div>
+
+                                    <hr />
+                                    <h5>Situaciones</h5>
+                                    <p> </p>
+                                    <div class="container">
+                                        <span>
+                                            <strong>Situación Interna: </strong> 
+                                            {% if respuesta.enfoque_interno == '1' %}
+                                            Si, Me gustaria hablar al respecto
+                                            {% elif respuesta.enfoque_interno == '2' %}
+                                            Si, No gustaria hablar al respecto
+                                            {% elif respuesta.enfoque_interno == '3' %}
+                                            No
+                                            {% else %}
+                                            Valor Desconocido
+                                            {% endif %} 
+                                            <br>
+                                        </span>
+                                        <span>
+                                            <strong>Situación Externa: </strong>
+                                            {% if respuesta.enfoque_externo == '1' %}
+                                            Si, Me gustaria hablar al respecto
+                                            {% elif respuesta.enfoque_externo == '2' %}
+                                            Si, No gustaria hablar al respecto
+                                            {% elif respuesta.enfoque_externo == '3' %}
+                                            No
+                                            {% else %}
+                                            Valor Desconocido
+                                            {% endif %}
+                                            <br>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
+                data-list-info="data-list-info">1 to 5 <span class="text-600"> Items of </span>43</span>
+            <div class="d-flex">
+                <button class="page-link disabled" data-list-pagination="prev" disabled=""><svg
+                        class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas"
+                        data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                        data-fa-i2svg="">
+                        <path fill="currentColor"
+                            d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z">
+                        </path>
+                    </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
+                <ul class="mb-0 pagination">
+                    <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
+                    <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+                    <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
+                    <li class="disabled"><button class="page" type="button">...</button></li>
+                </ul>
+                <button class="page-link pe-0" data-list-pagination="next"><svg class="svg-inline--fa fa-chevron-right"
+                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                            d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z">
+                        </path>
+                    </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

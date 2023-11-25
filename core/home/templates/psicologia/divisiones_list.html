@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="my-5">
+  <div class="position-fixed w-100 z-index-5 mx-n4 mx-lg-n6 bg-white border-bottom border-300" style="top: 65px">
+    <nav class="simplebar-scrollspy navbar py-0 scrollbar-overlay" id="widgets-scrollspy">
+      <ul class="nav">
+        <li class="nav-item"> <a class="test nav-link text-700 fw-bold py-3 lh-1 text-nowrap" href="">Planteles</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="container" id="divisiones">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-3">
+    {% for division in divisiones %}
+    <div class="col">
+      <div class="card" style="max-width: 16rem;">
+        <img class="card-img-top" src="{{ division.image.url}}" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ division.division }}</h5>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group btn-group-sm">
+            <a class="btn btn-outline-primary btn-sm"
+              href="{% url 'psicologia.plantel.jugadores' division=division.division %}">Ver Jugadores</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'respuestas.division' division=division.division %}">Ver
+              respuestas</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% endblock %}

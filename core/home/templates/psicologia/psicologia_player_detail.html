@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="my-5">
+    <div class="position-fixed w-100 z-index-5 mx-n4 mx-lg-n6 bg-white border-bottom border-300" style="top: 65px">
+        <nav class="simplebar-scrollspy navbar py-0 scrollbar-overlay" id="widgets-scrollspy">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="test nav-link text-700 fw-bold py-3 lh-1 text-nowrap" href="#scrollsdivisiones">
+                        Psicología > Planteles > {{ plantel }} > Jugador > {{ jugador.user.first_name }} {{jugador.user.last_name }}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="container border" id="reporte">
+    <h1 class="text-center border-bottom" style="padding-bottom: 10px;">FC Juarez | Departamento de Psicologia</h1>
+    <!-- Datos Generales -->
+    <div class="container border-bottom">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center my-5">
+                    <img src="{{ jugador.image.url }}" alt="Descripción de la imagen" height="300px">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="text-left my-5">
+                    <!-- Agrega aquí el nombre completo del jugador y los datos generales centrados -->
+                    <div class="text-center my-5">
+                        <h3>{{ jugador.user.first_name }} {{ jugador.user.last_name }}</h3>
+                    </div>
+                    <div class="row">
+                        <!-- Columna 1 de datos generales -->
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <p>Edad: {{ jugador.edad }}</p>
+                                <p>Posición: {{ jugador.posicion }}</p>
+                                <!-- Agrega más campos según tus necesidades -->
+                            </div>
+                        </div>
+                        <!-- Columna 2 de datos generales -->
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <p>Altura: {{ jugador.altura }}</p>
+                                <p>Peso: {{ jugador.peso }}</p>
+                                <!-- Agrega más campos según tus necesidades -->
+                            </div>
+                        </div>
+                        
+                        <br><br>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                            <p></p>
+                            <p></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <p></p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <p></p>
+                                <a href="{% url 'jugador.detail.pdf' first_name=jugador.user.first_name last_name=jugador.user.last_name %}" class="btn btn-primary" target="_blank">Pdf</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards  -->
+    <div class="px-3 mb-5 border-bottom">
+        <div class="row justify-content-between">
+            <div
+                class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end border-bottom pb-4 pb-xxl-0 ">
+                <h1 class="fs-3 pt-3">{{ cuenta }}</h1>
+                <p class="fs--1 mb-0">Respuestas totales</p>
+            </div>
+            <div
+                class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end-md border-bottom pb-4 pb-xxl-0">
+                <h1 class="fs-3 pt-3">{{ interno }}</h1>
+                <p class="fs--1 mb-0">Situación Externa</p>
+            </div>
+            <div
+                class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-bottom-xxl-0 border-bottom border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0">
+                <h1 class="fs-3 pt-3">{{ externo }}</h1>
+                <p class="fs--1 mb-0">Situación Interna</p>
+            </div>
+            <div
+                class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-md border-end-xxl-0 border-bottom border-bottom-md-0 pb-4 pb-xxl-0 pt-4 pt-xxl-0">
+                <h1 class="fs-3 pt-3">{{ hablar }}</h1>
+                <p class="fs--1 mb-0"> Busca hablar </p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Gráficas en pares -->
+    <div class="container">
+        <div class="row border">
+            <div class="col-md-6">
+                {{ nivel_eustres | safe }}
+            </div>
+            <div class="col-md-6">
+                {{ nivel_distres | safe }}
+            </div>
+        </div>
+        <div class="row border">
+            <div class="col-md-6">
+                {{ preparacion_mental | safe }}
+            </div>
+            <div class="col-md-6">
+                {{ humor_matutino | safe }}
+            </div>
+        </div>
+        <div class="row border">
+            <div class="col-md-6">
+                {{ horas_dormidas | safe }}
+            </div>
+            <!-- Agrega más contenido según sea necesario -->
+        </div>
+    </div>
+
+
+    <!-- Tabla -->
+    <br><br>
+    <div id="tableExample"
+        data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;age&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
+        <div class="table-responsive">
+            <table class="table table-sm fs--1 mb-0">
+                <thead>
+                    <tr>
+                        <th class="sort border-top ps-3">Nombre</th>
+                        <th class="sort border-top">Fecha de creación</th>
+                        <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for cuestionario in cuestionarios %}
+
+                    <tr>
+                        <td class="align-middle ps-3 name">{{ cuestionario.user.first_name }} {{ cuestionario.user.last_name }}</td>
+                        <td class="align-middle created_at">{{ cuestionario.created_at}}</td>
+                        <td class="align-middle white-space-nowrap text-end pe-0">
+                            <div class="font-sans-serif btn-reveal-trigger position-static">
+                                <button
+                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                    type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                    aria-expanded="false" data-bs-reference="parent"><svg
+                                        class="svg-inline--fa fa-ellipsis fs--2" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="ellipsis" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z">
+                                        </path>
+                                    </svg><!-- <span class="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --></button>
+                                <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item"
+                                        href="#!">Ver</a><a class="dropdown-item" href="#!">Exportar</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                        href="#!">Borrar</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br><br>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

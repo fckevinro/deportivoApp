@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="my-5">Informes de partido</h1>
+<div id="informes"
+    data-list="{&quot;valueNames&quot;:[&quot;partido&quot;,&quot;jornada&quot;,&quot;date&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true,&quot;filter&quot;:{&quot;key&quot;:&quot;status&quot;}}">
+    <div class="table-responsive">
+        <table class="table table-sm fs--1 mb-0">
+            <thead>
+                <tr class="bg-light">
+                    <th class="sort border-top ps-3" data-sort="partido">Partido</th>
+                    <th class="sort border-top" data-sort="jornada">Jornada</th>
+                    <th class="sort border-top" data-sort="date">Fecha</th>
+                    <th class="sort align-middle text-center" scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                {% for informe in informes %}
+                <tr>
+                    <td class="align-middle ps-3 partido"> {{ informe.equipo_casa }} vs {{ informe.equipo_visita }}
+                    </td>
+                    <td class="align-middle ps-3 jornada">{{ informe.jornada }}</td>
+                    <td class="align-middle date"> {{ informe.fecha_calendario }} </td>
+                    <td class="align-middle white-space-nowrap text-center">
+                        <div class="font-sans-serif btn-reveal-trigger position-static">
+                            <button
+                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                aria-expanded="false" data-bs-reference="parent"><span
+                                    class="fas fa-ellipsis-h fs--2"></span></button>
+                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                <a class="dropdown-item" href="{% url 'informes.detail' pk=informe.id %}">Ver</a>
+                                <a class="dropdown-item" href="#!">Exportar</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+        <div class="col-auto d-flex">
+            <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info">0 to 0 <span
+                    class="text-600"> Items of </span>0</p>
+            <a class="fw-semi-bold" href="#!" data-list-view="*">View all
+                <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span>
+            </a>
+            <a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less
+                <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span>
+            </a>
+        </div>
+        <div class="col-auto d-flex">
+            <button class="page-link disabled" data-list-pagination="prev" disabled="">
+                <span class="fas fa-chevron-left"></span>
+            </button>
+            <ul class="mb-0 pagination">
+                <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
+                <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+            </ul>
+            <button class="page-link pe-0" data-list-pagination="next">
+                <span class="fas fa-chevron-right"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

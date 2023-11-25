@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="{% static 'js/color-modes.js' %}"></script>
+    <link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .logout-message {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="logout-message" class="logout-message" style="display: none;">
+        <a href="{% url 'login' %}">
+            <img src="{% static 'assets/logos/logo-bravos.png' %}" alt="Logo" class="logo" height="100px">
+        </a>
+
+        <p style="font-size: 18px; margin-bottom: 10px;">Vuelve pronto</p>
+        <p style="font-size: 14px; color: #888;">Serás redirigido en unos segundos...</p>
+    </div>
+
+    <script>
+        const logoutMessage = document.getElementById('logout-message');
+
+        setTimeout(function () {
+            logoutMessage.style.display = 'block';
+            setTimeout(function () {
+                window.location.href = "{% url 'login' %}";
+            }, 5000); // 5000 milisegundos = 5 segundos
+        }); // 5000 milisegundos = 5 segundos
+    </script>
+</body>
+
+</html>

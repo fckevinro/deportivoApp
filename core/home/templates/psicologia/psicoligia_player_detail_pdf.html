@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Informe FC Juárez | Departamento de Psicología</title>
+    <style>
+        @page {
+            size: letter landscape;
+            /* Tamaño de página carta en orientación horizontal */
+            margin: 0;
+            /* Eliminar los márgenes de la página por defecto */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            /* Eliminar márgenes del cuerpo */
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .player-image {
+            max-width: 200px;
+            margin-right: 20px;
+            padding: 19px;
+        }
+
+        .player-details {
+            flex: 1;
+            
+        }
+
+        .player-details table {
+            width: 100%;
+            margin-top: -20px;
+            /* Ajustar el margen superior para subir los detalles */
+        }
+
+        .player-details td {
+            width: 50%;
+            padding: 5px;
+        }
+
+        .centered-graph {
+            display: flex;
+            justify-content: center;
+        }
+
+        .graph img {
+            max-width: 80%;
+            /* Reducido en un 20% */
+            display: block;
+            margin: 0 auto;
+            /* Centrar horizontalmente las imágenes */
+        }
+
+        /* Estilo para la sección como tabla */
+        .section-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .section-table th,
+        .section-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .section-table th {
+            background-color: whitesmoke;
+            /* Color verde claro para los encabezados */
+            font-weight: bold;
+        }
+
+        .section-table h1 {
+            font-size: 18px;
+        }
+
+        .section-table p {
+            font-size: 14px;
+        }
+
+        /* Estilo para las gráficas en la misma línea */
+        .graph-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            border: 1px #ccc solid;
+
+        }
+
+        .graph {
+            flex: 1;
+            max-width: 49%;
+            /* Para asegurar que ambas gráficas quepan en la misma línea */
+        }
+
+        /* Estilo para la portada */
+        .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            /* Ajustar la imagen para que ocupe toda la página */
+        }
+
+        /* Pie de página en la primera página */
+        #footer-first {
+            position: fixed;
+            bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px; /* Tamaño de letra más pequeño */
+        }
+
+        /* Pie de página en las páginas siguientes */
+        #footer {
+            position: fixed;
+            bottom: 10px; /* Ajusta la distancia desde la parte inferior */
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px; /* Tamaño de letra más pequeño */
+            margin: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Portada -->
+    <img class="cover" src="{% static 'assets/img/bg/PORTADA-PRESENTACIONES-AP-2023.png' %}" alt="Portada del informe">
+
+    <!-- Título -->
+    <h1></h1>
+
+    <!-- Resto del contenido del informe -->
+    <!-- Pie de página en la primera página -->
+    <h1 id="footer">Departamento de Ciencia de Datos</h1>
+
+
+    
+    <div style="margin: 40px; border: 1px #ccc solid; padding: 10px;">
+        <!-- Página en blanco para que las siguientes secciones comiencen en una nueva página -->
+        <div style="page-break-before: always;"></div>
+        <h1>FC Juárez | Departamento de Psicología</h1>
+        <div class="player-info" style="border: 1px #ccc solid;">
+            <img src="{{ jugador.image.url }}" alt="Imagen del Jugador" class="player-image">
+            <div class="player-details">
+                <h2 style="text-align: left; border-bottom: 1px #ccc solid;">Detalles del Jugador</h2>
+                <table style="margin-top: 5px;">
+                    <tr>
+                        <td><b>Nombre:</b></td>
+                        <td>{{ jugador.user.first_name }} {{ jugador.user.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Edad:</b></td>
+                        <td>{{ edad }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Posición:</b></td>
+                        <td>{{ Delantero }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Peso:</b></td>
+                        <td>{{ Delantero }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Altura:</b></td>
+                        <td>{{ Delantero }}</td>
+                    </tr>
+                </table>
+                <br><br>
+            </div>
+        </div>
+
+        <!-- Sección como tabla -->
+        <table class="section-table" >
+            <tr>
+                <th>Respuestas totales</th>
+                <th>Situación Externa</th>
+                <th>Situación Interna</th>
+                <th>Busca hablar</th>
+            </tr>
+            <tr>
+                <td>
+                    <h1 class="fs-3 pt-3">{{ cuenta }}</h1>
+                </td>
+                <td>
+                    <h1 class="fs-3 pt-3">{{ interno }}</h1>
+                </td>
+                <td>
+                    <h1 class="fs-3 pt-3">{{ externo }}</h1>
+                </td>
+                <td>
+                    <h1 class="fs-3 pt-3">{{ hablar }}</h1>
+                </td>
+
+            </tr>
+        </table>
+
+        <!-- Contenedor para las gráficas en la misma línea -->
+        <div class="graph-container" style="border: 1px #ccc solid;">
+            <div class="graph">
+                <img src="data:image/png;base64,{{ nivel_eustres }}">
+            </div>
+
+            <div class="graph">
+                <img src="data:image/png;base64,{{ nivel_distres }}">
+            </div>
+        </div>
+        <br><br>
+        <div class="graph-container">
+            <div class="graph">
+                <img src="data:image/png;base64,{{ preparacion_mental }}">
+            </div>
+
+            <div class="graph">
+                <img src="data:image/png;base64,{{ humor_matutino }}" >
+            </div>
+        </div>
+        <div class="graph-container">
+            <div class="graph">
+                <img src="data:image/png;base64,{{ horas_dormidas }}">
+            </div>
+
+            <div class="graph">
+                <img src="data:image/png;base64,{{ nivel_distres }}">
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br>
+
+</body>
+
+</html>

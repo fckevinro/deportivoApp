@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1 class="my-5">
+        Informe de partido 
+    </h1>
+
+
+    <div class="card">
+        <div class="card-header text-center">
+            <h4>{{ informe.equipo_casa }} vs {{ informe.equipo_visita }}</h4>
+            <span> Jornada: {{ informe.jornada }} | {{ informe.fecha_calendario }}</span>
+        </div>
+        <div class="card-body">
+            <div>
+                <h5>Generalidades</h5>
+                {{ informe.generalidades|safe }}
+            </div>
+            <div>
+                <h5>Fase ofensiva</h5>
+                {{ informe.fase_ofensiva|safe }}
+            </div>
+            <div>
+                <h5>Fase defensiva</h5>
+                {{ informe.fase_defensiva|safe }}
+            </div>
+            <div>
+                <h5>ABP</h5>
+                {{ informe.abp|safe }}
+            </div>
+            <div>
+                <h5>Notas del partido</h5>
+                {{ informe.notas_partido|safe }}
+            </div>
+        </div>
+        <div class="card-footer text-center text-primary">
+            <h6>
+                Departamento de ciencia de datos | FCJuárez
+            </h6>
+        </div>
+    </div>
+
+    
+
+
+{% endblock %}

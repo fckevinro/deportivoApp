@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>FC Juarez</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/icons/fcjuarez.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/icons/fcjuarez.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/icons/fcjuarez.png' %}">
+    <link rel="manifest" href="{% static 'assets/img/favicons/manifest.json' %}">
+    <meta name="msapplication-TileImage" content="{% static 'assets/img/favicons/mstile-150x150.png' %}">
+    <meta name="theme-color" content="#ffffff">
+    <script src="{% static 'vendors/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendors/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'assets/js/config.js' %}"></script>
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
+    <link href="{% static 'vendors/simplebar/simplebar.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="{% static 'assets/css/theme-rtl.min.css' %}" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="{% static 'assets/css/theme.min.css' %}" type="text/css" rel="stylesheet" id="style-default">
+    <link href="{% static 'assets/css/user-rtl.min.css' %}" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="{% static 'assets/css/user.min.css' %}" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+        var phoenixIsRTL = window.config.config.phoenixIsRTL;
+        if (phoenixIsRTL) {
+            var linkDefault = document.getElementById('style-default');
+            var userLinkDefault = document.getElementById('user-style-default');
+            linkDefault.setAttribute('disabled', true);
+            userLinkDefault.setAttribute('disabled', true);
+            document.querySelector('html').setAttribute('dir', 'rtl');
+        } else {
+            var linkRTL = document.getElementById('style-rtl');
+            var userLinkRTL = document.getElementById('user-style-rtl');
+            linkRTL.setAttribute('disabled', true);
+            userLinkRTL.setAttribute('disabled', true);
+        }
+    </script>
+    <link href="{% static 'vendors/leaflet/leaflet.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/leaflet.markercluster/MarkerCluster.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/leaflet.markercluster/MarkerCluster.Default.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <header class="container" style="max-width: 100%;">
+        <a href="{% url 'logout' %}" style="text-align: right;">Desconectar</a>
+    </header>
+    <div class="container border my-5" style="max-width: 1200px;">
+        <div class="container" style="display: flex; align-items: center; padding-bottom: 30px;">
+            <img src="{% static 'assets/img/icons/fcjuarez.png' %}" alt="Imagen FC Juárez" width="100" height="100">
+            <h1 style="margin: 0 auto;">Cuestionario | FC Juárez</h1>
+        </div>
+
+        <div class="container" style="max-width: 1200px;">
+            <form method="POST" name="my_form" id="my_form"> {% csrf_token %}
+
+                <!-- Campo humor_matutino -->
+                <div class="form-group my-2">
+                    <label for="{{ form.humor_matutino.id_for_label }}">{{ form.humor_matutino.label }}</label>
+                    {{ form.humor_matutino }}
+                </div>
+
+                <!-- Campo horas_dormidas -->
+                <label for="">¿Cuantas horas dormiste?</label>
+                <div class="form-row my-2" style="display: flex; justify-content: left; ">
+
+                    <div class="form-group col-md-6" style="padding-right: 10px; width: 80px;">
+                        <label for="{{ form.horas_dormidas.id_for_label }}">{{ form.horas_dormidas.label }}</label>
+                        {{ form.horas_dormidas }}
+                    </div>
+
+                    <div class="form-group col-md-6" style=" width: 80px;">
+                        <label for="{{ form.minutos_dormidos.id_for_label }}">{{ form.minutos_dormidos.label }}</label>
+                        {{ form.minutos_dormidos }}
+                    </div>
+                </div>
+
+                <!-- Campo calidad_descanso -->
+                <div class="form-group my-2">
+                    <label for="{{ form.calidad_descanso.id_for_label }}">{{ form.calidad_descanso.label }}</label>
+                    {{ form.calidad_descanso }}
+                </div>
+
+                <!-- Campo nivel_eustres -->
+                <div class="form-group my-2">
+                    <label for="{{ form.nivel_eustres.id_for_label }}">{{ form.nivel_eustres.label }}</label>
+                    {{ form.nivel_eustres }}
+                </div>
+
+                <!-- Campo nivel_distres -->
+                <div class="form-group my-2">
+                    <label for="{{ form.nivel_distres.id_for_label }}">{{ form.nivel_distres.label }}</label>
+                    {{ form.nivel_distres }}
+                </div>
+
+                <!-- Campo preparacion_mental -->
+                <div class="form-group my-2">
+                    <label for="{{ form.preparacion_mental.id_for_label }}">{{ form.preparacion_mental.label }}</label>
+                    {{ form.preparacion_mental }}
+                </div>
+
+                <!-- Campo enfoque_externo -->
+                <div class="form-group my-2">
+                    <label for="{{ form.enfoque_externo.id_for_label }}">{{ form.enfoque_externo.label }}</label>
+                    {{ form.enfoque_externo }}
+                </div>
+
+                <!-- Campo enfoque_interno -->
+                <div class="form-group my-2">
+                    <label for="{{ form.enfoque_interno.id_for_label }}">{{ form.enfoque_interno.label }}</label>
+                    {{ form.enfoque_interno }}
+                </div>
+
+                <!-- Campo comentarios_adicionales -->
+                <div class="form-group my-2">
+                    <label for="{{ form.comentarios_adicionales.id_for_label }}">{{ form.comentarios_adicionales.label }}</label>
+                    {{ form.comentarios_adicionales }}
+                </div>
+
+                <button type="submit" class="btn btn-primary my-5">Enviar</button>
+
+            </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

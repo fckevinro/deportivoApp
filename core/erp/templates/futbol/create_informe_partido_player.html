@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+    selector: '#text-area'
+    });
+</script>
+
+
+<form method="POST" name="my_form" id="my_form"> {% csrf_token %}
+
+    <div class="form-class">
+        <label class="form-label"> {{ form.user.label }}</label>
+        {{ form.user }}
+    </div>
+    <div class="form-class">
+        <label class="form-label"> {{ form.jornada.label }}</label>
+        {{ form.jornada }}
+    </div>
+    <div class="form-class">
+        <label class="form-label"> {{ form.rival.label }}</label>
+        {{ form.rival }}
+    </div>
+    <div class="form-class">
+        <label class="form-label"> {{ form.fecha_calendario.label }}</label>
+        {{ form.fecha_calendario }}
+    </div>
+    <div class="form-class my-5">
+        <label class="form-label"> {{ form.notas_partido.label }}</label>
+        {{ form.notas_partido }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Guardar
+    </button>
+</form>
+
+
+{{form.errors}}
+
+
+{% endblock %}

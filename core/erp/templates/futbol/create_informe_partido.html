@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<script src="https://cdn.tiny.cloud/1/d315f05bafd4b2a153bd41bdf502f60ae0450d6e35bb325f122c3fc0efe43356/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+    selector: '#text-generalidades'
+    });
+    tinymce.init({
+    selector: '#text-ofensive'
+    });
+    tinymce.init({
+    selector: '#text-defensive'
+    });
+    tinymce.init({
+    selector: '#text-abp'
+    });
+    tinymce.init({
+    selector: '#text-area'
+    });
+</script>
+
+
+<form method="POST" name="my_form" id="my_form"> {% csrf_token %}
+
+    <div class="form-class">
+        <label class="form-label"> {{ form.equipo_casa.label }}</label>
+        {{ form.equipo_casa }}
+    </div>
+    <div class="form-class">
+        <label class="form-label"> {{ form.equipo_visita.label }}</label>
+        {{ form.equipo_visita }}
+    </div>
+    <div class="form-class">
+        <label class="form-label"> {{ form.jornada.label }}</label>
+        {{ form.jornada }}
+    </div>
+    <div class="form-class">
+        <label class="form-label"> {{ form.fecha_calendario.label }}</label>
+        {{ form.fecha_calendario }}
+    </div>
+    <div class="form-class my-5">
+        <label class="form-label"> {{ form.generalidades.label }}</label>
+        {{ form.generalidades }}
+    </div>
+    <div class="form-class my-5">
+        <label class="form-label"> {{ form.fase_ofensiva.label }}</label>
+        {{ form.fase_ofensiva }}
+    </div>
+    <div class="form-class my-5">
+        <label class="form-label"> {{ form.fase_defensiva.label }}</label>
+        {{ form.fase_defensiva }}
+    </div>
+    <div class="form-class my-5">
+        <label class="form-label"> {{ form.abp.label }}</label>
+        {{ form.abp }}
+    </div>
+    <div class="form-class my-5">
+        <label class="form-label"> {{ form.notas_partido.label }}</label>
+        {{ form.notas_partido }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Guardar
+    </button>
+</form>
+
+
+
+{% endblock %}
